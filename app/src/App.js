@@ -30,14 +30,17 @@ const App = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(form),
-        }).then(res => console.log(res))
-          
-          // .then((data) => {
-          //   console.log(data);
+        }).then((res) => {
+          if(res.ok){
+            setPriceFinal(price - ((price*discount)/100));
+            setDiscount('')
+            setRender(res.ok);
 
-          //   setRender(!render);
-          //   setPriceFinal(data);
-          // });
+            setTimeout(() => {
+              setRender(false);
+            }, 2000)
+          }
+        })
     }
   }
 
@@ -60,11 +63,7 @@ const App = () => {
               )  
             })}
         </div>
-        {render && 
-          <div>
-            <p>O preço com desconto é {priceFinal}</p>
-          </div>
-        }
+        {render && alert(`O preço com desconto é ${priceFinal.toFixed(2)}`)}
     </>
   )
 }

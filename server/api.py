@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, Response, stream_with_context, jsonify
 from flask_cors import CORS, cross_origin
 import mysql.connector
 import json
@@ -42,8 +42,9 @@ def calculate():
     else:
         data = request.get_json()
         price = (int(data["price"]) - ((int(data["price"]) * int(data["discount"])) / 100))
-        response.end({"price": price})
-
+        # data = {"price": price}
+        # d = json.dumps(data)
+        return jsonify(data)
         
 
 @app.errorhandler(404)
