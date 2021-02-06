@@ -1,0 +1,1 @@
+SELECT id_product, name_product, price FROM products
